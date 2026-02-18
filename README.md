@@ -45,6 +45,4 @@ docker-compose up --build
 Это поможет вам понять структуру событий `message_created`, `callback`, `user_added` и написать правильные Pydantic-модели.
 
 💬 Поддержка и Коммьюнити
-Этот проект поддерживается энтузиастами. Мы собираем базу знаний по MAX API (Payloads, паттерны, хаки).
-
-👉 \\Вступить в MAX API Devs | Разработка ботов — обсуждение, помощь, нетворкинг.
+Этот проект поддерживается энтузиастами. Мы собираем базу знаний по MAX API (Payloads, паттерны, хаки) - https://max.ru/join/xuOCxEvbn0nKepqaooBlHt35UZyvtwWwJoJLdeMzhy4
