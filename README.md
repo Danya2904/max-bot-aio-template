@@ -3,9 +3,6 @@
 **Готовый асинхронный шаблон для разработки ботов под MAX Messenger API.**
 Построен на базе `aiogram-like` архитектуры: Handlers, Middlewares, FSM (Redis), SQLAlchemy (Async).
 
-> **Cообщество разработчиков:**
-> У вас вопросы по API? Присоединяйтесь к чату **[MAX API Devs | Разработка ботов](https://max.ru/join/xuOCxEvbn0nKepqaooBlHt35UZyvtwWwJoJLdeMzhy4)**.
-
 ## Почему этот шаблон?
 
 Разработка под MAX API часто приводит к вложенным JSON, отсутствию нормальной документации, отсутствие готовых FSM.
@@ -41,7 +38,11 @@ MAX_BOT_TOKEN=ваш_токен
 
 Bash
 docker-compose up --build
-💬 Поддержка и Коммьюнити
-Этот проект поддерживается энтузиастами. Мы собираем базу знаний по MAX API (Payloads, паттерны, хаки).
 
-👉 \\Вступить в MAX API Devs | Разработка ботов — обсуждение, помощь, нетворкинг.
+## Справочник API (Real World Payloads)
+
+В папке проекта лежит файл MAX_API_Real_Payloads_2026.md - **коллекцию реальных JSON-пейлоадов** MAX API 2026.
+Это поможет вам понять структуру событий `message_created`, `callback`, `user_added` и написать правильные Pydantic-модели.
+
+💬 Поддержка и Коммьюнити
+Этот проект поддерживается энтузиастами. Мы собираем базу знаний по MAX API (Payloads, паттерны, хаки) - https://max.ru/join/xuOCxEvbn0nKepqaooBlHt35UZyvtwWwJoJLdeMzhy4
