@@ -44,4 +44,4 @@ docker-compose up --build
 💬 Поддержка и Коммьюнити
 Этот проект поддерживается энтузиастами. Мы собираем базу знаний по MAX API (Payloads, паттерны, хаки).
 
-👉 \\Вступить в MAX API Devs | Разработка ботов — обсуждение, помощь, нетворкинг.
+Вступить в MAX API Devs | Разработка ботов — Мы собираем базу знаний по MAX API (Payloads, паттерны, хаки) - https://max.ru/join/xuOCxEvbn0nKepqaooBlHt35UZyvtwWwJoJLdeMzhy4 
