@@ -1,0 +1,7 @@
+aiohttp
+sqlalchemy[asyncio]
+asyncpg
+redis
+pydantic
+pydantic-settings
+loguru
