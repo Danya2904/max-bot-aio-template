@@ -1,0 +1,46 @@
+name: Sync File Across Repositories
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'path/to/your/shared_file.go' # Укажи путь к файлу, который триггерит обновление
+
+jobs:
+  sync-and-pr:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Список репозиториев, куда нужно отправить PR
+        target_repo: [ 'owner1/repo-name-1', 'owner2/repo-name-2' ]
+    
+    steps:
+      - name: Checkout Source Repository
+        uses: actions/checkout@v4
+        with:
+          path: source-repo
+
+      - name: Checkout Target Repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ matrix.target_repo }}
+          token: ${{ secrets.SYNC_PAT_TOKEN }} # Требуется Personal Access Token (PAT) с правами repo
+          path: target-repo
+
+      - name: Copy updated file
+        run: |
+          cp source-repo/path/to/your/shared_file.go target-repo/path/to/destination/shared_file.go
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          path: target-repo
+          token: ${{ secrets.SYNC_PAT_TOKEN }}
+          commit-message: "chore(sync): update shared_file.go from golden standard"
+          title: "chore: Sync core file from upstream"
+          body: |
+            Автоматический PR.
+            Файл `shared_file.go` был обновлен в эталонном репозитории.
+          branch: chore/sync-shared-file
+          base: main

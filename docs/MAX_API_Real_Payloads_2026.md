@@ -288,6 +288,92 @@ JSON
 }
 
 
+## 2.5 Анализ несоответствий: Docs vs Real Payloads
+
+Здесь и далее:
+**DOCS**: Как это описано в объектах Message, User на dev.max.ru.
+**REAL**: Что на самом деле прилетает в вебхуке (твой файл).
+
+### 1. Структура обновления (Update Wrapper)
+Критичное отличие: Документация описывает объект Message. Но вебхук присылает объект Update, внутри которого лежит message.
+
+**DOCS**: Описывает чистый Message:
+```json
+{ "sender": {...}, "body": {...} }
+```
+
+**REAL**: Оборачивает всё в контейнер с метаданными:
+```json
+{
+  "update_type": "message_created",  // <--- Этого нет в описании Message
+  "user_locale": "ru",               // <--- Важно для локализации
+  "timestamp": 1739184000000,        // <--- Дублируется на верхнем уровне
+  "message": { ... }                 // <--- Сам объект Message тут
+}
+```
+> **Вывод**: Твой `main.py` должен парсить корень JSON, смотреть `update_type`, и только потом лезть в `['message']`.
+
+### 2. Таймстемпы (Timestamp)
+Мелкая, но фатальная деталь:
+
+**DOCS**: "**Unix-time**" (обычно подразумеваются секунды, 1739184000).
+**REAL**: **Milliseconds** (1739184000000).
+
+> **Вывод**: Если парсить как секунды, получишь 57000-й год. Дели на 1000.
+
+### 3. Объект Sender (Отправитель)
+**DOCS**: Часто ссылаются на User объект.
+**REAL**: Поле называется **sender**, а не `from` (как в Telegram) или `user`.
+
+Нюанс: В Telegram API это `message.from`. В MAX API это `message.sender`.
+Нюанс 2: В реальном пейлоаде у бота (`is_bot: true`) есть поле `username`, а у юзера его может не быть (или пустое), зато есть `name`.
+
+### 4. Текст сообщения (Body)
+Самая частая ошибка новичков в MAX.
+
+Telegram Style / Ожидание: `message.text`
+**DOCS**: `body.text`
+**REAL**: `message.body.text`
+
+```json
+"body": {
+  "mid": "mid.REDACTED",
+  "seq": 0,
+  "text": "Привет"
+}
+```
+> **Вывод**: Текст лежит глубоко: `payload['message']['body']['text']`.
+
+### 5. Callback (Нажатие кнопок)
+Здесь архитектура MAX сильно отличается от Telegram.
+
+**REAL**: При нажатии кнопки приходит `update_type: "message_callback"`.
+В этом объекте `callback` и `message` — братья (siblings).
+
+```json
+{
+  "callback": { "payload": "utm_view_6", ... }, // <--- Данные кнопки тут
+  "message": { ... }                            // <--- Сообщение, к которому кнопка привязана
+}
+```
+> **Вывод**: ID пользователя, нажавшего кнопку, лежит в `callback.user.user_id`, а не в `message.sender.user_id` (sender там — это сам бот, отправивший сообщение).
+
+### 6. Вложения (Attachments)
+**DOCS**: MessageBody может содержать `attachments`.
+
+**REAL**:
+```json
+"body": {
+  "text": "Описание...",
+  "attachments": [
+    { "type": "inline_keyboard", "payload": { ... } }, // Клавиатура — это тоже attachment!
+    { "type": "image", "payload": { "url": "..." } }
+  ]
+}
+```
+> **Вывод**: Кнопки (`inline_keyboard`) приходят как вложение, а не отдельным полем `reply_markup` (как в Telegram).
+
+
 3. The Internal Normalization Layer
 
 IMPORTANT FOR DEVELOPERS: The SubCheckerBot transforms the Raw Data (above) into a Normalized Object in main.py before passing it to Handlers.
