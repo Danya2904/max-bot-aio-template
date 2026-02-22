@@ -13,21 +13,24 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=postgresql+asyncpg://user:password@db:5432/bot_db
+      # Формируем URL внутри контейнера на лету из переменных
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-bot_db}
       - REDIS_URL=redis://redis:6379/0
     restart: always
 
   db:
     image: postgres:15-alpine
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=bot_db
+      - POSTGRES_USER=${POSTGRES_USER:-user}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+      - POSTGRES_DB=${POSTGRES_DB:-bot_db}
+    ports:
+      - "5432:5432" # Открываем порт для DataGrip / DBeaver
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./docker/postgres_init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d bot_db"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-user} -d ${POSTGRES_DB:-bot_db}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -35,6 +38,8 @@ services:
 
   redis:
     image: redis:7-alpine
+    ports:
+      - "6379:6379" # Открываем порт для RedisInsight
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s

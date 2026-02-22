@@ -1,6 +1,5 @@
+from pydantic import Field, SecretStr, PostgresDsn, RedisDsn, HttpUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import Field
-
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -9,10 +8,13 @@ class Settings(BaseSettings):
         extra="ignore"
     )
 
-    MAX_BOT_TOKEN: str
-    MAX_API_URL: str = Field(default="https://platform-api.max.ru")
-    DATABASE_URL: str = Field(description="PostgreSQL async connection string")
-    REDIS_URL: str = Field(description="Redis connection string")
+    # --- MAX API Config ---
+    MAX_BOT_TOKEN: SecretStr = Field(description="Strictly secret bot token")
+    MAX_API_URL: HttpUrl = Field(default="https://platform-api.max.ru")
+
+    # --- Infrastructure Config ---
+    DATABASE_URL: PostgresDsn = Field(description="PostgreSQL async connection string")
+    REDIS_URL: RedisDsn = Field(description="Redis connection string")
 
 
 settings = Settings()
