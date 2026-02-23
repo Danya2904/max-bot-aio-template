@@ -1,48 +1,71 @@
-# ⚡️ MAX Bot AIO Template (Production Ready)
+⚡️ MAX Bot AIO: The Golden Standard Template
+Профессиональный Scaffold для разработки высоконагруженных систем на базе MAX Messenger API. Этот шаблон — фундамент «The Golden Standard» индустрии, ориентированный на System Design, Strict Typing и Zero-Downtime эксплуатацию. 
++1
 
-**Готовый асинхронный шаблон для разработки ботов под MAX Messenger API.**
-Построен на базе `aiogram-like` архитектуры: Handlers, Middlewares, FSM (Redis), SQLAlchemy (Async).
+🏗 Architectural Core (The Anti-Spaghetti Manifesto)
+Мы не пишем ботов, мы строим распределенные системы. 
 
-## Почему этот шаблон?
 
-Разработка под MAX API часто приводит к вложенным JSON, отсутствию нормальной документации, отсутствие готовых FSM.
-Этот шаблон решает главные проблемы:
+Layered Architecture: Полная изоляция бизнес-логики от транспорта (API) и инфраструктуры (DB/Cache). 
 
-* **Нормализация данных:** Встроенный слой превращает кривые JSON от MAX в удобные объекты `NormalizedMessage`.
-* **FSM (Машина состояний):** Готовая реализация на Redis (с fallback в память) для диалогов.
-* **Clean Architecture:** Четкое разделение: Хендлеры → Сервисы → БД.
-* **Docker-First:** Разворачивается одной командой `docker-compose up`.
-* **Типизация:** Полностью на Python 3.10+ с Type Hints и Pydantic.
+Safety by Design: Pydantic V2 для тотальной валидации входящих Payload и конфигураций. Никаких dict.get(). 
++1
 
-## Стек
 
-* **Python 3.10+**
-* **Aiohttp** (Асинхронные запросы)
-* **SQLAlchemy 2.0 + Asyncpg** (База данных)
-* **Redis** (Кэш и Состояния)
-* **Pydantic Settings** (Конфигурация)
+Observability First: Встроенный экспорт метрик для Prometheus, структурированные JSON-логи и трассировка запросов. 
 
-## Быстрый старт
 
-1. **Клонируйте репозиторий:**
-   ```bash
-   git clone [https://github.com/ВАШ_ЮЗЕРНЕЙМ/max-bot-aio-template.git](https://github.com/ВАШ_ЮЗЕРНЕЙМ/max-bot-aio-template.git)
-   cd max-bot-aio-template
-Настройте окружение:
-Скопируйте .env.example в .env и вставьте токен бота:
+Dependency Injection: Чистое управление компонентами без глобальных переменных. 
 
-Ini, TOML
-MAX_BOT_TOKEN=ваш_токен
-# Остальное можно не менять для локального запуска
-Запустите через Docker:
+🛠 Tech Stack & Infrastructure
 
+Runtime: Python 3.12+ (Asyncio / UVLoop) 
+
+
+Framework: SQLAlchemy 2.0 (Async) + Alembic (Migrations) 
+
+
+State Management: Redis (Production) / In-Memory (Dev/Testing) 
+
+
+Delivery: Aiohttp Optimized Engine (Strict Typing for MAX API) 
+
+
+DevOps: Multi-stage Docker builds, Taskfile, GitHub Actions (CI/CD) 
+
+🚀 Quick Start (Production Grade)
+1. Подготовка окружения
 Bash
-docker-compose up --build
+# Клонирование с проверкой целостности
+git clone https://github.com/your-org/max-bot-aio-template.git && cd max-bot-aio-template
 
-## Справочник API (Real World Payloads)
+# Использование Taskfile (замена Makefile для DX)
+task install
+cp .env.example .env
+2. Конфигурация
+Отредактируйте .env. Мы используем Pydantic Settings, поэтому ошибка в одной переменной предотвратит запуск контейнера (Fail-fast). 
 
-В папке проекта лежит файл MAX_API_Real_Payloads_2026.md - **коллекцию реальных JSON-пейлоадов** MAX API 2026.
-Это поможет вам понять структуру событий `message_created`, `callback`, `user_added` и написать правильные Pydantic-модели.
+3. Запуск инфраструктуры
+Bash
+docker-compose up -d --build
+📂 Project Structure (Scaffold)
+Plaintext
+├── cmd/                # Точки входа (App entrypoints)
+├── internal/           # Приватный код (Business Logic)
+│   ├── delivery/       # Handlers, Middlewares (MAX API specific)
+│   ├── usecase/        # Pure Business Logic (Services)
+│   └── repository/     # Data Access Layer (SQLAlchemy/Redis)
+├── pkg/                # Публичные библиотеки (Shared utils)
+├── migrations/         # Alembic versioning
+├── tests/              # Unit & Integration tests (Pytest + Mocks)
+└── Taskfile.yml        # DX Command Center
+📈 Observability & Quality Assurance
+Linter: Strict ruff & mypy (strict mode). Код, не прошедший статический анализ, в прод не попадает. 
 
-💬 Поддержка и Коммьюнити
-Этот проект поддерживается энтузиастами. Мы собираем базу знаний по MAX API (Payloads, паттерны, хаки) - https://max.ru/join/xuOCxEvbn0nKepqaooBlHt35UZyvtwWwJoJLdeMzhy4
+Metrics: /metrics эндпоинт для мониторинга RPS, Latency и ошибок API.
+
+
+Mocks: Готовая стратегия мокирования внешних вызовов MAX API для тестов. 
+
+📑 Knowledge Base
+В корне проекта находится MAX_API_Real_Payloads_2026.md. Это — «библия» реальных данных. Если API изменится, мы обновляем контракт здесь.
