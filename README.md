@@ -1,4 +1,4 @@
-⚡️ MAX Bot AIO: The Golden Standard Template
+## ⚡️ MAX Bot AIO: The Golden Standard Template
 
 Профессиональный Scaffold для разработки высоконагруженных систем на базе MAX Messenger API. Этот шаблон — фундамент «The Golden Standard» индустрии, ориентированный на System Design, Strict Typing и Zero-Downtime эксплуатацию.
 
