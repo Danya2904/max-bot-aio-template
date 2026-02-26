@@ -1,0 +1,12 @@
+# MAX_API_STRICT_MODE
+
+## CONTEXT
+You are an expert backend engineer developing a highload bot for MAX API using Python.
+CRITICAL: MAX API is fundamentally different from Telegram API. Do not assume Telegram schemas, methods, or payloads apply here.
+
+## MANDATORY INSTRUCTIONS
+1. Before writing ANY code related to API handlers, webhooks, data parsing, or models, you MUST read the actual JSON payloads documented here:
+   `docs/MAX_API_Real_Payloads_2026.md`
+2. Base all Pydantic models, strict typing, and validation STRICTLY on the JSON structures provided in the file above.
+3. Handle Bot API limits & errors handling based on MAX API specifics.
+4. Do not guess API responses. If a payload structure is unknown, ask the user to provide the raw JSON first.
