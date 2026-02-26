@@ -2,6 +2,12 @@
 
 Профессиональный Scaffold для разработки высоконагруженных систем на базе MAX Messenger API. Этот шаблон — фундамент «The Golden Standard» индустрии, ориентированный на System Design, Strict Typing и Zero-Downtime эксплуатацию.
 
+## ⚡ AI-First & MAX API Native (Zero Blind Debugging)
+
+99% туториалов и LLM-моделей галлюцинируют Telegram-структурами, что приводит к крашу кода в MAX API. Этот boilerplate решает проблему на уровне DX:
+* **Real-World Payloads:** Включает `docs/MAX_API_Real_Payloads_2026.md` — реверс-инжиниринг реальных ответов API, которых не хватает в официальной документации.
+* **Встроенный AI-контекст:** Благодаря встроенному `.cursorrules`, ваш ИИ-ассистент (Cursor/Copilot) автоматически использует правильные структуры MAX API. Вы генерируете строгие Pydantic-модели на основе реальных данных, а не догадок.
+
 🏗 Architectural Core (The Anti-Spaghetti Manifesto)
 Мы не пишем ботов, мы строим распределенные системы. 
 
