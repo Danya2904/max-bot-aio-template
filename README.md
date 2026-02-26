@@ -63,8 +63,11 @@ Linter: Strict ruff & mypy (strict mode). Код, не прошедший ста
 
 Metrics: /metrics эндпоинт для мониторинга RPS, Latency и ошибок API.
 
-
 Mocks: Готовая стратегия мокирования внешних вызовов MAX API для тестов. 
 
 📑 Knowledge Base
 В корне проекта находится MAX_API_Real_Payloads_2026.md. Это — «библия» реальных данных. Если API изменится, мы обновляем контракт здесь.
+
+Need help or want to discuss MAX bot architecture?
+Join our Dev Community:
+Max Chat: https://max.ru/join/xuOCxEvbn0nKepqaooBlHt35UZyvtwWwJoJLdeMzhy4
