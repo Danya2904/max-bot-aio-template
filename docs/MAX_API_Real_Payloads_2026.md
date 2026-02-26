@@ -393,6 +393,7 @@ Images: External URLs are forbidden. Flow: POST /uploads -> Get Token -> POST /m
 
 Deep Links: Parsed from message.body.text (e.g., /start c42) or specific payload fields if available.
 
->**Original Source & Updates:**
-> This document is a snapshot of the collection maintained in [this GitHub Gist](https://gist.github.com/Danya2904/4280c88912090e7440fb7bfc54abdea3).
-> Please check the Gist for the most recent updates or to leave comments/stars.
+Need help or want to discuss MAX bot architecture?
+
+Join our Dev Community:
+Max Chat: https://max.ru/join/xuOCxEvbn0nKepqaooBlHt35UZyvtwWwJoJLdeMzhy4
