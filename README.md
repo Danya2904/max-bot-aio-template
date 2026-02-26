@@ -8,7 +8,7 @@
 * **Real-World Payloads:** Включает `docs/MAX_API_Real_Payloads_2026.md` — реверс-инжиниринг реальных ответов API, которых не хватает в официальной документации.
 * **Встроенный AI-контекст:** Благодаря встроенному `.cursorrules`, ваш ИИ-ассистент (Cursor/Copilot) автоматически использует правильные структуры MAX API. Вы генерируете строгие Pydantic-модели на основе реальных данных, а не догадок.
 
-🏗 Architectural Core (The Anti-Spaghetti Manifesto)
+# 🏗 Architectural Core (The Anti-Spaghetti Manifesto)
 Мы не пишем ботов, мы строим распределенные системы. 
 
 
@@ -22,7 +22,7 @@ Observability First: Встроенный экспорт метрик для Pro
 
 Dependency Injection: Чистое управление компонентами без глобальных переменных. 
 
-🛠 Tech Stack & Infrastructure
+# 🛠 Tech Stack & Infrastructure
 
 Runtime: Python 3.12+ (Asyncio / UVLoop) 
 
@@ -38,7 +38,7 @@ Delivery: Aiohttp Optimized Engine (Strict Typing for MAX API)
 
 DevOps: Multi-stage Docker builds, Taskfile, GitHub Actions (CI/CD) 
 
-🚀 Quick Start (Production Grade)
+# 🚀 Quick Start (Production Grade)
 1. Подготовка окружения
 Bash
 # Клонирование с проверкой целостности
@@ -53,7 +53,7 @@ cp .env.example .env
 3. Запуск инфраструктуры
 Bash
 docker-compose up -d --build
-📂 Project Structure (Scaffold)
+# 📂 Project Structure (Scaffold)
 Plaintext
 ├── cmd/                # Точки входа (App entrypoints)
 ├── internal/           # Приватный код (Business Logic)
@@ -71,9 +71,9 @@ Metrics: /metrics эндпоинт для мониторинга RPS, Latency и
 
 Mocks: Готовая стратегия мокирования внешних вызовов MAX API для тестов. 
 
-📑 Knowledge Base
+# 📑 Knowledge Base
 В корне проекта находится MAX_API_Real_Payloads_2026.md. Это — «библия» реальных данных. Если API изменится, мы обновляем контракт здесь.
 
-Need help or want to discuss MAX bot architecture?
+# Need help or want to discuss MAX bot architecture?
 Join our Dev Community:
 Max Chat: https://max.ru/join/xuOCxEvbn0nKepqaooBlHt35UZyvtwWwJoJLdeMzhy4
